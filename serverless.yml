@@ -1,0 +1,43 @@
+service:
+  name: 500-cidades-graphql-sls-api-${self:provider.stage}
+  publish: false
+
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-west-2
+  timeout: 30
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+functions:
+  graphql:
+    handler: index.graphqlHandler
+    events:
+     - http:
+        method: POST
+        path: /
+        cors:
+          origin: '*'
+          headers:
+            - Content-Type
+            - Access-Control-Allow-Origin
+            - X-Amz-Date
+            - Authorization
+            - X-Api-Key
+            - X-Amz-Security-Token
+            - X-Amz-User-Agent
+          allowCredentials: true
+
+     - http:
+        method: GET
+        path: playground
+        cors: true
