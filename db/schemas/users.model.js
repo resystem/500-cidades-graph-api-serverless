@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-const { ObjectId } = Schema.Types;
+// const { ObjectId } = Schema.Types;
 
 const usersModel = new Schema({
   ida: { type: String, required: true, unique: true },
