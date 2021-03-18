@@ -1,5 +1,4 @@
 import { UserInputError } from 'apollo-server-lambda';
-import Sympla from '../services/sympla.service';
 
 /**
 * create - Função que cria um usuário no banco de dados
