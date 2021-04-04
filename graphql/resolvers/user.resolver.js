@@ -8,6 +8,5 @@ export default {
   mutations: {
     createUser: Controller.create,
     updateUser: Controller.update,
-    addTicketIntoUser: Controller.addTicket,
   },
 };
