@@ -1,12 +1,13 @@
 import mongoose from 'mongoose';
 import users from './schemas/users.model';
+import adresses from './schemas/adresses.model';
 import images from './schemas/images.model';
 import videos from './schemas/videos.model';
 
 
 mongoose.Promise = global.Promise;
 
-export default async ({ conn, mongoUrl = 'mongodb://localhost/500-cidades' }) => {
+export default async ({ conn, mongoUrl }) => {
   console.log('mongoUrl: ', mongoUrl);
 
   try {
@@ -20,6 +21,7 @@ export default async ({ conn, mongoUrl = 'mongodb://localhost/500-cidades' }) =>
       });
 
       newConnection.model('users', users);
+      newConnection.model('adresses', adresses);
       newConnection.model('images', images);
       newConnection.model('videos', videos);
 

@@ -34,6 +34,7 @@ const server = new ApolloServer(
         context,
         // connection
         users: conn.model('users'),
+        adresses: conn.model('adresses'),
         images: conn.model('images'),
         videos: conn.model('videos'),
       });
