@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import users from './schemas/users.model';
+import images from './schemas/images.model';
 import videos from './schemas/videos.model';
 
 
@@ -19,6 +20,7 @@ export default async ({ conn, mongoUrl = 'mongodb://localhost/500-cidades' }) =>
       });
 
       newConnection.model('users', users);
+      newConnection.model('images', images);
       newConnection.model('videos', videos);
 
       return newConnection;
