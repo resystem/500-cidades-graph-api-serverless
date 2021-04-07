@@ -25,7 +25,7 @@ const create = async (parent, args, { entities }) => {
     throw new Error(err);
   }
 
-  return { ...entity, id: entity._id };
+  return { ...getMongoDoc(entity), id: entity._id };
 };
 
 /**

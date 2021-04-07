@@ -4,7 +4,7 @@ export default `
   ): Entity
 
   updateEntity(
-    entity: UserInput
+    entity: EntityInput
   ): Entity
 
 `;
