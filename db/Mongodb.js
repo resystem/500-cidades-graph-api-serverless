@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import users from './schemas/users.model';
+import subscriptions from './schemas/subscriptions.model';
 import entities from './schemas/entities.model';
 import adresses from './schemas/adresses.model';
 import images from './schemas/images.model';
@@ -22,11 +23,11 @@ export default async ({ conn, mongoUrl }) => {
       });
 
       newConnection.model('users', users);
+      newConnection.model('subscriptions', subscriptions);
       newConnection.model('entities', entities);
       newConnection.model('adresses', adresses);
       newConnection.model('images', images);
       newConnection.model('videos', videos);
-
       return newConnection;
     }
 
