@@ -1,18 +1,20 @@
 import { UserInputError } from 'apollo-server-lambda';
+import { getMongoDoc } from '../utils/mongo.util';
 
 /**
-* create - Função que cria um usuário no banco de dados
+* create - Função que cria um endereço no banco de dados
 *
 * @function create
 * @param {object} parent it contains the result returned from the resolver on the parent type
 * @param {object} args it contains filter, sort, skip and limit to build the query
 * @param {object} context it contains all mongo collections
 */
-const create = async (parent, args, { users }) => {
-  let user;
+const create = async (parent, args, { adresses }) => {
+  let address;
 
+  if (!args.address.geolocation) throw new Error('Missing "address.geolocation" value');
   try {
-    user = JSON.parse(JSON.stringify(await users.create(args.user)));
+    address = getMongoDoc(await adresses.create(args.address));
   } catch (err) {
     console.log([err]);
     const duplicatedKeys = Object.keys(err.keyPattern);
@@ -24,30 +26,26 @@ const create = async (parent, args, { users }) => {
     throw new Error(err);
   }
 
-  return user;
+  return { ...address, id: address._id };
 };
 
 /**
-* findOne - Função que acha um usuário por id, e-mail, cpf ou ida.
+* findOne - Função que acha um endereço por id
 *
 * @function findOne
 * @param {object} parent it contains the result returned from the resolver on the parent type
 * @param {object} args it contains filter, sort, skip and limit to build the query
 * @param {object} context it contains all mongo collections
 */
-const findOne = (parent, args, { users }) => {
-  const $or = [];
+const findOne = async (parent, args, { adresses }) => {
+  if (!args.address.id) throw Error('Missing "address.id" value');
 
-  if (args.id) $or.push({ _id: args.id });
-  if (args.ida) $or.push({ ida: args.ida });
-  if (args.email) $or.push({ email: args.email });
-  if (args.cpf) $or.push({ cpf: args.cpf });
-
-  return users.findOne({ $or });
+  const result = getMongoDoc(await adresses.findOne({ _id: args.address.id }));
+  return { ...result, id: result._id };
 };
 
 /**
- findAll - Função que acha retorna usuários com as informações indicadas
+ findAll - Função que acha retorna endereços com as informações indicadas
 * have some match with indicated attribute.
 *
 * @function findAll
@@ -55,25 +53,38 @@ const findOne = (parent, args, { users }) => {
 * @param {object} args it contains filter, sort, skip and limit to build the query
 * @param {object} context it contains all mongo collections
 */
-const findAll = (parent, args, { users }) => users.find(args.user).lean()
-  .then(resp => resp.map(usr => ({ ...usr, id: resp._id })))
-  .catch((err) => {
-    throw new Error(err);
-  });
+const findAll = async (parent, args, { adresses }) => {
+  const paginator = args.paginator || {};
+  const response = await adresses.find(args.address)
+    .skip(paginator.skip)
+    .limit(paginator.limit)
+    .lean()
+    .then(resp => resp.map(address => ({ ...address, id: address._id })))
+    .catch((err) => {
+      throw new Error(err);
+    });
 
+  return response;
+};
 /**
-* update - Função que atualiza o usuário
+* update - Função que atualiza o endereço
 *
 * @function update
 * @param {object} parent it contains the result returned from the resolver on the parent type
 * @param {object} args it contains filter, sort, skip and limit to build the query
 * @param {object} context it contains all mongo collections
 */
-const update = async (parent, args, { users }) => {
-  const user = await users
-    .findOneAndUpdate({ _id: args.user.id }, args.user, { new: true });
+const update = async (parent, args, { adresses }) => {
+  if (!args.address.geolocation) throw new Error('Missing "address.geolocation" value');
 
-  return user;
+  const resp = await adresses.findOneAndUpdate(
+    { _id: args.address.id },
+    args.address,
+    { new: true },
+  );
+  const address = getMongoDoc(resp);
+
+  return { ...address, id: address._id };
 };
 
 export default {
