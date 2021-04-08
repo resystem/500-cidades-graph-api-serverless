@@ -35,6 +35,9 @@ const server = new ApolloServer(
         // connection
         users: conn.model('users'),
         entities: conn.model('entities'),
+        adresses: conn.model('adresses'),
+        images: conn.model('images'),
+        videos: conn.model('videos'),
       });
     },
   },
