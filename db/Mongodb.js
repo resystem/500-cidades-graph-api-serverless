@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import users from './schemas/users.model';
+import subscriptions from './schemas/subscriptions.model';
 
 
 mongoose.Promise = global.Promise;
@@ -18,6 +19,7 @@ export default async ({ conn, mongoUrl = 'mongodb://localhost/500-cidades' }) =>
       });
 
       newConnection.model('users', users);
+      newConnection.model('subscriptions', subscriptions);
       return newConnection;
     }
 
