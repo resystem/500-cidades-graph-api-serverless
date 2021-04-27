@@ -1,11 +1,9 @@
 export default `
-  oneUser( 
-    id: String
-    ida: String
-    email: String
+  oneUser(
+    user: UserInput
   ): User
 
-  allUsers( 
+  allUsers(
     user: UserInput
   ): [User]
 `;

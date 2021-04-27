@@ -41,10 +41,10 @@ const usersModel = new Schema({
   ],
   entities_owner: [
     { type: ObjectId, ref: 'entities' }
+  ],
+  subscriptions:  [
+    { type: ObjectId, ref: 'subscriptions' }
   ]
-// subscriptions:  [
-//   { type: ObjectId, ref: 'subscriptions' }
-//   ]
 }, {
   usePushEach: true,
   timestamps: { updatedAt: 'updated_at', createdAt: 'created_at' },

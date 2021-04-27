@@ -43,7 +43,14 @@ const findOne = (parent, args, { users }) => {
   if (args.email) $or.push({ email: args.email });
   if (args.cpf) $or.push({ cpf: args.cpf });
 
-  return users.findOne({ $or });
+  const resp = await users.findOne({ $or })
+    .populate(address)
+    .populate(images)
+    .populate(entities)
+    .populate(subscriptions);
+
+  const user = getMongoDoc(resp);
+  return { ...user, id: user._id };
 };
 
 /**
@@ -55,11 +62,23 @@ const findOne = (parent, args, { users }) => {
 * @param {object} args it contains filter, sort, skip and limit to build the query
 * @param {object} context it contains all mongo collections
 */
-const findAll = (parent, args, { users }) => users.find(args.user).lean()
-  .then(resp => resp.map(usr => ({ ...usr, id: resp._id })))
-  .catch((err) => {
-    throw new Error(err);
-  });
+const findAll = async (parent, args, { users }) => {
+  const paginator = args.paginator || {};
+  const response = await entities.find(args.user)
+    .skip(paginator.skip)
+    .limit(paginator.limit)
+    .populate(address)
+    .populate(images)
+    .populate(entities)
+    .populate(subscriptions)
+    .lean()
+    .then(resp => resp.map(user => ({ ...user, id: user._id })))
+    .catch((err) => {
+      throw new Error(err);
+    });
+
+  return response;
+};
 
 /**
 * update - Função que atualiza o usuário
@@ -70,10 +89,19 @@ const findAll = (parent, args, { users }) => users.find(args.user).lean()
 * @param {object} context it contains all mongo collections
 */
 const update = async (parent, args, { users }) => {
-  const user = await users
-    .findOneAndUpdate({ _id: args.user.id }, args.user, { new: true });
+  const resp = await users.findOneAndUpdate(
+    { _id: args.user.id },
+    args.user,
+    { new: true },
+  )
+    .populate(address)
+    .populate(images)
+    .populate(entities)
+    .populate(subscriptions);
 
-  return user;
+  const user = getMongoDoc(resp);
+
+  return { ...user, id: user._id };
 };
 
 export default {

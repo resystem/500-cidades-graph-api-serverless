@@ -5,7 +5,7 @@ export default `
     user: User,
     video_url: String
   }
-  
+
   input VideoInput {
     id: ID
     name: String,

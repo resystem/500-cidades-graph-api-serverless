@@ -1,10 +1,10 @@
 export default `
-  oneAddress( 
+  oneAddress(
     address: AddressInput
     paginator: PaginatorInput
   ): Address
 
-  allAdresses( 
+  allAdresses(
     address: AddressInput
   ): [Address]
 `;

@@ -6,7 +6,7 @@ import videoType from './video.type';
 
 export default `
   scalar JSON
-  
+
   ${userType}
   ${addressType}
   ${imageType}

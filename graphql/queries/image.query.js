@@ -1,9 +1,9 @@
 export default `
-  oneImage( 
+  oneImage(
     image: ImageInput
   ): Image
 
-  allImages( 
+  allImages(
     image: ImageInput
   ): [Image]
 `;
