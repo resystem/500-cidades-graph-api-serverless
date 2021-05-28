@@ -93,12 +93,10 @@ const findAll = (parent, args, { users }) => users.find(args.user).populate('add
 * @param {object} context it contains all mongo collections
 */
 const update = async (parent, args, { users }) => {
-  console.log('🚀 ~ args', args);
   const user = await users
     .findOneAndUpdate({ _id: args.user.id }, args.user, { new: true })
     .populate('address');
 
-  console.log('🚀 ~ user', user);
   return user;
 };
 
