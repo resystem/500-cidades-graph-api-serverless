@@ -39,7 +39,7 @@ const create = async (parent, args, { subscriptions }) => {
 const findOne = async (parent, args, { subscriptions }) => {
   if (!args.subscription.id) throw new Error('Missing "subscription.id" value');
 
-  const resp = await subscriptions.findOne({ _id: args.subscription.id })
+  const resp = await subscriptions.findOne({ _id: args.subscription.id });
 
   const subscription = getMongoDoc(resp);
   return { ...subscription, id: subscription._id };
@@ -83,7 +83,7 @@ const update = async (parent, args, { subscriptions }) => {
     { _id: args.subscription.id },
     args.subscription,
     { new: true },
-  )
+  );
   const subscription = getMongoDoc(resp);
 
   return { ...subscription, id: subscription._id };

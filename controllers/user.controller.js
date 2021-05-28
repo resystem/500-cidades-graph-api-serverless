@@ -12,7 +12,12 @@ const create = async (parent, args, { users }) => {
   let user;
 
   try {
-    user = JSON.parse(JSON.stringify(await users.create(args.user)));
+    user = JSON.parse(JSON.stringify(await users.create(args.user).then(resp => resp
+      .populate('address')
+      .execPopulate())
+      .catch((err) => {
+        throw new Error(err);
+      })));
   } catch (err) {
     console.log([err]);
     const duplicatedKeys = Object.keys(err.keyPattern);
@@ -24,7 +29,14 @@ const create = async (parent, args, { users }) => {
     throw new Error(err);
   }
 
-  return user;
+  return {
+    ...user,
+    id: user._id,
+    address: {
+      ...user.address,
+      id: user.address._id,
+    },
+  };
 };
 
 /**
@@ -36,14 +48,18 @@ const create = async (parent, args, { users }) => {
 * @param {object} context it contains all mongo collections
 */
 const findOne = (parent, args, { users }) => {
-  const $or = [];
+  try {
+    const $or = [];
 
-  if (args.id) $or.push({ _id: args.id });
-  if (args.ida) $or.push({ ida: args.ida });
-  if (args.email) $or.push({ email: args.email });
-  if (args.cpf) $or.push({ cpf: args.cpf });
+    if (args.id) $or.push({ _id: args.id });
+    if (args.ida) $or.push({ ida: args.ida });
+    if (args.email) $or.push({ email: args.email });
+    if (args.cpf) $or.push({ cpf: args.cpf });
 
-  return users.findOne({ $or });
+    return users.findOne({ $or }).populate('address');
+  } catch (err) {
+    throw err;
+  }
 };
 
 /**
@@ -55,8 +71,15 @@ const findOne = (parent, args, { users }) => {
 * @param {object} args it contains filter, sort, skip and limit to build the query
 * @param {object} context it contains all mongo collections
 */
-const findAll = (parent, args, { users }) => users.find(args.user).lean()
-  .then(resp => resp.map(usr => ({ ...usr, id: resp._id })))
+const findAll = (parent, args, { users }) => users.find(args.user).populate('address').lean()
+  .then(resp => resp.map(usr => ({
+    ...usr,
+    id: resp._id,
+    address: {
+      ...usr.address,
+      id: usr.address._id,
+    },
+  })))
   .catch((err) => {
     throw new Error(err);
   });
@@ -70,9 +93,12 @@ const findAll = (parent, args, { users }) => users.find(args.user).lean()
 * @param {object} context it contains all mongo collections
 */
 const update = async (parent, args, { users }) => {
+  console.log('🚀 ~ args', args);
   const user = await users
-    .findOneAndUpdate({ _id: args.user.id }, args.user, { new: true });
+    .findOneAndUpdate({ _id: args.user.id }, args.user, { new: true })
+    .populate('address');
 
+  console.log('🚀 ~ user', user);
   return user;
 };
 

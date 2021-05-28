@@ -4,7 +4,7 @@ const { ObjectId } = Schema.Types;
 
 const subscriptionModel = new Schema({
   user: { type: ObjectId, ref: 'users' },
-//   entity: { type: ObjectId, ref: 'entity' }
+  //   entity: { type: ObjectId, ref: 'entity' }
   role: { type: String, required: true },
   is_aproved: Boolean,
   is_blocked: Boolean,

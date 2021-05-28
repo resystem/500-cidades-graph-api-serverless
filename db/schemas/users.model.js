@@ -4,7 +4,7 @@ const { ObjectId } = Schema.Types;
 
 const usersModel = new Schema({
   ida: { type: String, required: true, unique: true },
-  name: { type: String, required: true},
+  name: { type: String, required: true },
   social_name: String,
   email: String,
   job: String,
@@ -12,7 +12,7 @@ const usersModel = new Schema({
   interests: [String],
   phone: String,
   hometown: String,
-  address: { type: ObjectId, ref: 'address' },
+  address: { type: ObjectId, ref: 'adresses' },
   gender: String,
   sexual_orientation: String,
   color_race: String,
@@ -31,17 +31,18 @@ const usersModel = new Schema({
   movies: String,
   series: String,
   dream: String,
+  whatsapp: String,
   favorite_places: String,
   places_wanna_visit: String,
   how_collaborate: String,
   sign: String,
   public_infos: [String],
   images: [
-    { type: ObjectId, ref: 'images' }
+    { type: ObjectId, ref: 'images' },
   ],
   entities_owner: [
-    { type: ObjectId, ref: 'entities' }
-  ]
+    { type: ObjectId, ref: 'entities' },
+  ],
 // subscriptions:  [
 //   { type: ObjectId, ref: 'subscriptions' }
 //   ]
