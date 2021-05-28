@@ -1,5 +1,5 @@
 service:
-  name: 500-cidades-graphql-sls-api-${self:provider.stage}
+  name: cidades-graphql-sls-api-${self:provider.stage}
   publish: false
 
 
