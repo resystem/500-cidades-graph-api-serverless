@@ -14,6 +14,7 @@ const create = async (parent, args, { users }) => {
   try {
     user = JSON.parse(JSON.stringify(await users.create(args.user).then(resp => resp
       .populate('address')
+      .populate('profile_image')
       .execPopulate())
       .catch((err) => {
         throw new Error(err);
@@ -56,7 +57,9 @@ const findOne = (parent, args, { users }) => {
     if (args.email) $or.push({ email: args.email });
     if (args.cpf) $or.push({ cpf: args.cpf });
 
-    return users.findOne({ $or }).populate('address');
+    return users.findOne({ $or })
+      .populate('address')
+      .populate('profile_image');
   } catch (err) {
     throw err;
   }
@@ -71,7 +74,10 @@ const findOne = (parent, args, { users }) => {
 * @param {object} args it contains filter, sort, skip and limit to build the query
 * @param {object} context it contains all mongo collections
 */
-const findAll = (parent, args, { users }) => users.find(args.user).populate('address').lean()
+const findAll = (parent, args, { users }) => users.find(args.user)
+  .populate('address')
+  .populate('profile_image')
+  .lean()
   .then(resp => resp.map(usr => ({
     ...usr,
     id: resp._id,
@@ -95,7 +101,8 @@ const findAll = (parent, args, { users }) => users.find(args.user).populate('add
 const update = async (parent, args, { users }) => {
   const user = await users
     .findOneAndUpdate({ _id: args.user.id }, args.user, { new: true })
-    .populate('address');
+    .populate('address')
+    .populate('profile_image');
 
   return user;
 };

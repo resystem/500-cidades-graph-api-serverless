@@ -14,7 +14,7 @@ const create = async (parent, args, { images }) => {
 
   // if (!args.image.user && !args.image.entity)
   // throw new Error('"user" or "entity" value is required');
-  if (!args.image.image_urls) throw new Error('Missing "image_urls" value');
+  if (!args.image.image_urls && !args.image.single_size) throw new Error('Missing "image_urls" value');
 
   try {
     image = getMongoDoc(await images.create(args.image));
@@ -87,7 +87,9 @@ const findAll = async (parent, args, { images }) => {
 */
 const update = async (parent, args, { images }) => {
   const toUpdate = {};
+  console.log('🚀 ~ args', args);
   if (args.image.image_urls) toUpdate.image_urls = args.image.image_urls;
+  if (args.image.single_size) toUpdate.single_size = args.image.single_size;
   if (args.image.user) toUpdate.user = args.image.user;
   if (args.image.entity) toUpdate.entity = args.image.entity;
   if (args.image.name) toUpdate.name = args.image.name;

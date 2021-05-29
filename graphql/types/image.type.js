@@ -16,18 +16,35 @@ export default `
     x1000: String
   }
 
+  type SingleImageUrl {
+    mimified: String
+    original: String
+    thumbnail: String
+  }
+  
+  input SingleImageUrlInput {
+    mimified: String
+    original: String
+    thumbnail: String
+  }
+
+
   type Image {
     id: ID
     name: String,
+    description: String,
     user: User,
     image_urls: ImageUrl
+    single_size: SingleImageUrl
   }
   
   input ImageInput {
     id: ID
     name: String,
+    description: String,
     user: String,
     image_urls: ImageUrlInput
+    single_size: SingleImageUrlInput
   }
   `;
 // entity Entity

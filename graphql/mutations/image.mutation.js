@@ -6,5 +6,4 @@ export default `
   updateImage(
     image: ImageInput
   ): Image
-
 `;

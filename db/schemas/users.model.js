@@ -40,6 +40,7 @@ const usersModel = new Schema({
   images: [
     { type: ObjectId, ref: 'images' },
   ],
+  profile_image: { type: ObjectId, ref: 'images' },
   entities_owner: [
     { type: ObjectId, ref: 'entities' },
   ],

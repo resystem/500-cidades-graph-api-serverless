@@ -12,7 +12,6 @@ export default `
     hometown: String
     gender: String
     sexual_orientation: String
-    address: Address
     color_race: String
     deficiency: String
     facebook: String
@@ -34,6 +33,9 @@ export default `
     places_wanna_visit: String
     how_collaborate: String
     sign: String
+    
+    address: Address
+    profile_image: Image
   }
 
   input UserInput {
@@ -47,7 +49,6 @@ export default `
     interests: [String]
     phone: String
     hometown: String
-    address: String
     gender: String
     sexual_orientation: String
     color_race: String
@@ -71,5 +72,8 @@ export default `
     places_wanna_visit: String
     how_collaborate: String
     sign: String
+    
+    profile_image: String
+    address: String
   }
 `;
