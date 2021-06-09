@@ -5,34 +5,40 @@ export default `
     name: String
     social_name: String
     email: String
-    job: String
     biography: String
-    interests: [String]
-    phone: String
-    hometown: String
-    gender: String
-    sexual_orientation: String
-    color_race: String
-    deficiency: String
+    whatsapp: String
     facebook: String
     instagram: String
     twitter: String
     tiktok: String
+    job: String
+    phone: String
+    hometown: String
+    homestate: String
+    homecountry: String
+    gender: String
+    sexual_orientation: String
+
+    color_race: String
+    deficiency: String
     web_site: String
     qualification: String
-    languages: [String]
-    hobbies: String
-    books: String
-    music: String
-    food: String
-    movies: String
-    whatsapp: String
-    series: String
-    dream: String
-    favorite_places: String
-    places_wanna_visit: String
-    how_collaborate: String
+    main_language: String
     sign: String
+    education: String
+    
+    how_to_collaborate: [String]
+    places_wanna_visit: [String]
+    favorite_places: [String]
+    dreams: [String]
+    series: [String]
+    movies: [String]
+    foods: [String]
+    songs: [String]
+    books: [String]
+    interests: [String]
+    languages: [String]
+    hobbies: [String]
     
     address: Address
     profile_image: Image
@@ -44,34 +50,40 @@ export default `
     name: String
     social_name: String
     email: String
-    job: String
     biography: String
-    interests: [String]
-    phone: String
-    hometown: String
-    gender: String
-    sexual_orientation: String
-    color_race: String
-    deficiency: String
+    whatsapp: String
     facebook: String
     instagram: String
     twitter: String
     tiktok: String
+    job: String
+    phone: String
+    hometown: String
+    homestate: String
+    homecountry: String
+    gender: String
+    sexual_orientation: String
+
+    color_race: String
+    deficiency: String
     web_site: String
     qualification: String
-    languages: [String]
-    hobbies: String
-    books: String
-    music: String
-    food: String
-    movies: String
-    whatsapp: String
-    series: String
-    dream: String
-    favorite_places: String
-    places_wanna_visit: String
-    how_collaborate: String
+    main_language: String
     sign: String
+    education: String
+    
+    how_to_collaborate: [String]
+    places_wanna_visit: [String]
+    favorite_places: [String]
+    dreams: [String]
+    series: [String]
+    movies: [String]
+    foods: [String]
+    songs: [String]
+    books: [String]
+    interests: [String]
+    languages: [String]
+    hobbies: [String]
     
     profile_image: String
     address: String

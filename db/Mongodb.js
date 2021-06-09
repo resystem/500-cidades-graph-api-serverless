@@ -5,6 +5,7 @@ import entities from './schemas/entities.model';
 import adresses from './schemas/adresses.model';
 import images from './schemas/images.model';
 import videos from './schemas/videos.model';
+import assets from './schemas/assets.model';
 
 
 mongoose.Promise = global.Promise;
@@ -28,6 +29,7 @@ export default async ({ conn, mongoUrl }) => {
       newConnection.model('adresses', adresses);
       newConnection.model('images', images);
       newConnection.model('videos', videos);
+      newConnection.model('assets', assets);
       return newConnection;
     }
 

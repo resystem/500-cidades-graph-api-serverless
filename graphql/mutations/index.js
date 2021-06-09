@@ -4,6 +4,7 @@ import user from './user.mutation';
 // import entity from './entity.mutation';
 import address from './address.mutation';
 import image from './image.mutation';
+import asset from './asset.mutation';
 // import video from './video.mutation';
 
 export default `
@@ -11,6 +12,7 @@ export default `
     ${user}
     ${address}
     ${image}
+    ${asset}
   }
   `;
 
