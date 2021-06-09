@@ -80,7 +80,7 @@ const findAll = (parent, args, { users }) => users.find(args.user)
   .lean()
   .then(resp => resp.map(usr => ({
     ...usr,
-    id: resp._id,
+    id: usr._id,
     address: {
       ...usr.address,
       id: usr.address._id,
