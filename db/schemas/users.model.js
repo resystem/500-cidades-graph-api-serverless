@@ -40,7 +40,7 @@ const usersModel = new Schema({
   dreams: [String],
   favorite_places: [String],
   places_wanna_visit: [String],
-  how_collaborate: [String],
+  how_to_collaborate: [String],
   public_infos: [String],
   images: [
     { type: ObjectId, ref: 'images' },
