@@ -24,7 +24,7 @@ export default `
     web_site: String
     qualification: String
     main_language: String
-    sign: String
+    birth_sign: String
     education: String
     
     how_to_collaborate: [String]
@@ -69,7 +69,7 @@ export default `
     web_site: String
     qualification: String
     main_language: String
-    sign: String
+    birth_sign: String
     education: String
     
     how_to_collaborate: [String]

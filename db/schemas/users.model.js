@@ -15,7 +15,7 @@ const usersModel = new Schema({
   sexual_orientation: String,
   color_race: String,
   deficiency: String,
-  sign: String,
+  birth_sign: String,
   main_language: String,
   job: String,
   email: String,
