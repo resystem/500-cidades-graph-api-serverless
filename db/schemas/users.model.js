@@ -11,6 +11,7 @@ const usersModel = new Schema({
   twitter: String,
   tiktok: String,
   gender: String,
+  birth_date: Date,
   biography: String,
   sexual_orientation: String,
   color_race: String,

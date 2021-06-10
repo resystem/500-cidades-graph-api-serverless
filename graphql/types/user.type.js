@@ -25,6 +25,7 @@ export default `
     qualification: String
     main_language: String
     birth_sign: String
+    birth_date: String
     education: String
     
     how_to_collaborate: [String]
@@ -70,6 +71,7 @@ export default `
     qualification: String
     main_language: String
     birth_sign: String
+    birth_date: String
     education: String
     
     how_to_collaborate: [String]
