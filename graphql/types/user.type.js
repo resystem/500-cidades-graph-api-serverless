@@ -27,7 +27,7 @@ export default `
     birth_sign: String
     birth_date: String
     education: String
-    
+    is_host_point: Boolean
     how_to_collaborate: [String]
     places_wanna_visit: [String]
     favorite_places: [String]
@@ -62,6 +62,7 @@ export default `
     hometown: String
     homestate: String
     homecountry: String
+    is_host_point: Boolean
     gender: String
     sexual_orientation: String
 

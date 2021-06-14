@@ -88,7 +88,7 @@ const findAll = (parent, args, { users }) => users.find(args.user)
     profile_image: {
       ...usr.profile_image,
       id: usr.profile_image._id,
-    }
+    },
   })))
   .catch((err) => {
     throw new Error(err);

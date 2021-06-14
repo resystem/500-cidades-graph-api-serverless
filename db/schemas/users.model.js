@@ -27,6 +27,7 @@ const usersModel = new Schema({
   web_site: String,
   hometown: String,
   homestate: String,
+  is_host_point: Boolean,
   homecountry: String,
   education: String,
 
