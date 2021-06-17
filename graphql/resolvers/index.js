@@ -1,9 +1,10 @@
 import user from './user.resolver';
-// import subscription from './subscription.resolver';
-// import entity from './entity.resolver';
+import entity from './entity.resolver';
 import address from './address.resolver';
 import image from './image.resolver';
 import asset from './asset.resolver';
+
+// import subscription from './subscription.resolver';
 // import video from './video.resolver';
 
 export default {
@@ -12,19 +13,19 @@ export default {
     ...address.queries,
     ...image.queries,
     ...asset.queries,
+    ...entity.queries,
   },
   Mutation: {
     ...user.mutations,
     ...address.mutations,
     ...image.mutations,
     ...asset.mutations,
+    ...entity.mutations,
   },
 };
 
 // ...subscription.queries,
-// ...entity.queries,
 // ...video.queries,
 
 // ...subscription.mutations,
-// ...entity.mutations,
 // ...video.mutations,

@@ -10,8 +10,8 @@ export const GENDER_LIST = [
   'fluid',
   'agender',
   'xenogender',
-  'dont_kno',
-  'not_sai',
+  'dont_know',
+  'not_said',
   'other',
 ];
 

@@ -3,30 +3,42 @@ import { Schema } from 'mongoose';
 const { ObjectId } = Schema.Types;
 
 const entityModel = new Schema({
-  name: { type: String, required: true },
-  type: { type: String, required: true },
+  biografy: { type: String },
+  birth_date: { type: Date },
   email: { type: String, required: true },
+  occupation: { type: String },
+  phone: { type: String },
+  whatsapp: { type: String },
+  name: { type: String, required: true },
 
-  // location: { type: ObjectId, ref: 'adresses' },// (Address)
+  fields_interest: [{ type: String }],
+  how_to_collaborate: [{ type: String }],
+
+  has_address: { type: Boolean },
+  is_host_point: { type: Boolean },
+
+  facebook: { type: String },
+  instagram: { type: String },
+  tik_tok: { type: String },
+  twitter: { type: String },
+  web_site: { type: String },
+
+  type: { type: String, required: true },
+  category: { type: String },
+
   // interests: [{ type: ObjectId, ref: 'subscriptions' }],// (arr of subscription)
   // images: [{ type: ObjectId, ref: 'images' }],// (arr of Image)
   // videos: [{ type: ObjectId, ref: 'videos' }], //: (arr of videos)
   owner: { type: ObjectId, ref: 'users' },
+  profile_image: { type: ObjectId, ref: 'images' },
+  address: { type: ObjectId, ref: 'adresses' },
 
-  biografy: { type: String },
   link: { type: String },
-  phone: { type: String },
-  facebook: { type: String },
-  instagram: { type: String },
-  twitter: { type: String },
-  tik_tok: { type: String },
-  web_site: { type: String },
   price_range: { type: String },
 
   roles: [{ type: String }],
   caracteristics: [{ type: String }],
 
-  birth_date: { type: Date },
   open_at_mon: { type: Date },
   open_at_tue: { type: Date },
   open_at_wed: { type: Date },

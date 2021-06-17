@@ -2,26 +2,40 @@
 export default `
   type Entity {
     id: String
-    name: String
-    type: String
-    email: String
-
-    owner: User
-  
     biografy: String
-    link: String
+    birth_date: String
+    email: String
+    occupation: String
     phone: String
+    whatsapp: String
+    name: String
+    
+    
+    fields_interest: [String]
+    how_to_collaborate: [String]
+    
+    has_address: Boolean
+    is_host_point: Boolean
+    
     facebook: String
     instagram: String
-    twitter: String
     tik_tok: String
+    twitter: String
     web_site: String
+
+    type: String
+    category: String
+    
+    
+    owner: User
+    profile_image: Image
+    address: Address
+    
+    
+    roles: [String]    
+    link: String
     price_range: String
-  
-    roles: [String]
     caracteristics: [String]
-  
-    birth_date: String
     open_at_mon: String
     open_at_tue: String
     open_at_wed: String
@@ -36,37 +50,50 @@ export default `
     closed_at_fry: String
     closed_at_sat: String
     closed_at_sun: String
-  
+
     ticket_office: Boolean
     has_accommodation: Boolean
     has_accessibility: Boolean
-  
+
     capacity: Int
     qtt_rooms: Int
   }
 
   input EntityInput {
     id: String
-    name: String
-    type: String
-    email: String
-
-    owner: String
-  
     biografy: String
-    link: String
+    birth_date: String
+    email: String
+    occupation: String
     phone: String
+    whatsapp: String
+    name: String
+    
+    
+    fields_interest: [String]
+    how_to_collaborate: [String]
+    
+    has_address: Boolean
+    is_host_point: Boolean
+    
     facebook: String
     instagram: String
-    twitter: String
     tik_tok: String
+    twitter: String
     web_site: String
+
+    type: String
+    category: String
+    
+    
+    owner: String
+    profile_image: String
+    address: String
+    
+    roles: [String]    
+    link: String
     price_range: String
-  
-    roles: [String]
     caracteristics: [String]
-  
-    birth_date: String
     open_at_mon: String
     open_at_tue: String
     open_at_wed: String
@@ -81,11 +108,11 @@ export default `
     closed_at_fry: String
     closed_at_sat: String
     closed_at_sun: String
-  
+
     ticket_office: Boolean
     has_accommodation: Boolean
     has_accessibility: Boolean
-  
+
     capacity: Int
     qtt_rooms: Int
   }

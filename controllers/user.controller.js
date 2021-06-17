@@ -37,6 +37,10 @@ const create = async (parent, args, { users }) => {
       ...user.address,
       id: user.address._id,
     },
+    profile_image: {
+      ...user.profile_image,
+      id: user.profile_image._id,
+    },
   };
 };
 

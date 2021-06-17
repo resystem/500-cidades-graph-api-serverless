@@ -10,6 +10,7 @@ import { getMongoDoc } from '../utils/mongo.util';
 * @param {object} context it contains all mongo collections
 */
 const create = async (parent, args, { entities }) => {
+  console.log('🚀 ~ args', args);
   let entity;
 
   try {
@@ -24,8 +25,19 @@ const create = async (parent, args, { entities }) => {
     }
     throw new Error(err);
   }
-
-  return { ...getMongoDoc(entity), id: entity._id };
+  const entityDoc = getMongoDoc(entity);
+  return {
+    ...entityDoc,
+    id: entityDoc._id,
+    address: {
+      ...entityDoc.address,
+      id: entityDoc.address._id,
+    },
+    profile_image: {
+      ...entityDoc.profile_image,
+      id: entityDoc.profile_image._id,
+    },
+  };
 };
 
 /**
@@ -44,6 +56,7 @@ const findOne = async (parent, args, { entities }) => {
     // .populate('interests')
     // .populate('images')
     // .populate('videos')
+    .populate('profile_image')
     .populate('owner');
 
   const entity = getMongoDoc(resp);
@@ -64,18 +77,32 @@ const findAll = async (parent, args, { entities }) => {
   const response = await entities.find(args.entity)
     .skip(paginator.skip)
     .limit(paginator.limit)
-    // .populate('location')
+    .populate('address')
+    .populate('owner')
+    .populate('profile_image')
     // .populate('interests')
     // .populate('images')
     // .populate('videos')
-    .populate('owner')
     .lean()
     .then(resp => resp.map(entity => ({ ...entity, id: entity._id })))
     .catch((err) => {
       throw new Error(err);
     });
 
-  return response;
+
+  console.log('🚀 ~ response', response);
+  return response.map(e => ({
+    ...e,
+    id: e._id,
+    address: {
+      ...e.address,
+      id: e.address._id,
+    },
+    profile_image: {
+      ...e.profile_image,
+      id: e.profile_image._id,
+    },
+  }));
 };
 
 /**
@@ -94,14 +121,26 @@ const update = async (parent, args, { entities }) => {
     args.entity,
     { new: true },
   )
-    // .populate('location')
     // .populate('interests')
     // .populate('images')
     // .populate('videos')
+    .populate('address')
+    .populate('profile_image')
     .populate('owner');
   const entity = getMongoDoc(resp);
 
-  return { ...entity, id: entity._id };
+  return {
+    ...entity,
+    id: entity._id,
+    address: {
+      ...entity.address,
+      id: entity.address._id,
+    },
+    profile_image: {
+      ...entity.profile_image,
+      id: entity.profile_image._id,
+    },
+  };
 };
 
 export default {
