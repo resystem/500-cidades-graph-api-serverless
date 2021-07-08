@@ -2,7 +2,7 @@
 export default `
   type Entity {
     id: String
-    biografy: String
+    biography: String
     birth_date: String
     email: String
     occupation: String
@@ -61,7 +61,7 @@ export default `
 
   input EntityInput {
     id: String
-    biografy: String
+    biography: String
     birth_date: String
     email: String
     occupation: String

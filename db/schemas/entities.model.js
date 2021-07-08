@@ -3,7 +3,7 @@ import { Schema } from 'mongoose';
 const { ObjectId } = Schema.Types;
 
 const entityModel = new Schema({
-  biografy: { type: String },
+  biography: { type: String },
   birth_date: { type: Date },
   email: { type: String, required: true },
   occupation: { type: String },
